@@ -8,6 +8,7 @@ include_once 'ConectionDBMysql.php';
 $soapserver = new nusoap_server();
 $soapserver->configureWSDL('wservice', 'urn:wservicewsdl');
 
+
 //*****Obtener las preordenes(todas)*****//
 
 //estructura de la consulta(entrada)
@@ -46,7 +47,7 @@ $soapserver->wsdl->addComplexType(
         'imagen' => array('name' => 'imagen', 'type' => 'xsd:string'),
         'id_cliente' => array('name' => 'id_cliente', 'type' => 'xsd:integer'),
         'id_cliente_nuevo' => array('name' => 'id_cliente_nuevo', 'type' => 'xsd:integer'),
-        'id_vehiculo' => array('name' => 'id_vehiculo', 'type' => 'xsd:integer'),
+        'id_vehiculo' => array('name' => 'id_vehiculo', 'type' => 'xsd:string'),
         'id_vehiculo_nuevo' => array('name' => 'id_vehiculo_nuevo', 'type' => 'xsd:integer')
     )
 );
@@ -211,6 +212,7 @@ $soapserver->wsdl->addComplexType(
     'complexType',
     'array',
     '',
+    'SOAP-ENC:Array',
     array(),
     array(
         array(
@@ -241,6 +243,7 @@ $soapserver->wsdl->addComplexType(
     'complexType',
     'array',
     '',
+    'SOAP-ENC:Array',
     array(),
     array(
         array(
@@ -271,6 +274,7 @@ $soapserver->wsdl->addComplexType(
     'complexType',
     'array',
     '',
+    'SOAP-ENC:Array',
     array(),
     array(
         array(
@@ -303,7 +307,7 @@ $soapserver->wsdl->addComplexType(
         'imagen' => array('name' => 'imagen', 'type' => 'xsd:string'),
         'id_cliente' => array('name' => 'id_cliente', 'type' => 'xsd:integer'),
         'id_cliente_nuevo' => array('name' => 'id_cliente_nuevo', 'type' => 'xsd:integer'),
-        'id_vehiculo' => array('name' => 'id_vehiculo', 'type' => 'xsd:integer'),
+        'id_vehiculo' => array('name' => 'id_vehiculo', 'type' => 'xsd:string'),
         'id_vehiculo_nuevo' => array('name' => 'id_vehiculo_nuevo', 'type' => 'xsd:integer'),
         'cliente_nuevo' => array('name' => 'cliente_nuevo', 'type' => 'tns:estructuraCliente'),
         'vehiculo_nuevo' => array('name' => 'vehiculo_nuevo', 'type' => 'tns:estructuraVehiculo'),
@@ -432,6 +436,7 @@ function detallePreorden($datos)
 
     $preorden = false;
     $resultPreorden = $db->executeQuery($selectPreorden);
+    //echo "error:";var_dump($db);
     if ($resultPreorden->num_rows > 0) {
         foreach ($resultPreorden as $rp) {
             $preorden = $rp;
